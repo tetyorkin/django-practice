@@ -1,5 +1,7 @@
+import os
 from django.http import HttpResponse
 from django.shortcuts import render, reverse
+import datetime as dt
 
 
 def home_view(request):
@@ -23,13 +25,12 @@ def home_view(request):
 def time_view(request):
     # обратите внимание – здесь HTML шаблона нет, 
     # возвращается просто текст
-    current_time = None
-    msg = f'Текущее время: {current_time}'
+    current_time = dt.datetime.now()
+    msg = f'Текущее время: {current_time:%H:%M:%S}'
     return HttpResponse(msg)
 
 
 def workdir_view(request):
-    # по аналогии с `time_view`, напишите код,
-    # который возвращает список файлов в рабочей 
-    # директории
-    raise NotImplemented
+    ls = os.listdir(path=".")
+    list_ls = [line+'\t' for line in ls]
+    return HttpResponse(list_ls)
