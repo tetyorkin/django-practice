@@ -1,4 +1,4 @@
-<!DOCTYPE html>{% load static %}
+﻿<!DOCTYPE html>{% load static %}
 <html>
   <head>
     <meta charset="UTF-8">
@@ -17,8 +17,42 @@
       <div class="row">
         <h1 class="col s12">Инфляция в России</h1>
         <div class="col s12 m8">
-        
+
         <!-- Ваша логика -->
+        <table class="u-full-width">
+          <thead>
+            <tr>
+                {% for h in column %}
+                    <th>{{ h }}</th>
+                {% endfor %}
+            </tr>
+          </thead>
+          <tbody>
+          {% for line in lines %}
+            <tr>
+                {% for col in line %}
+                    {% if forloop.first %}
+                        <td>{{ col }}</td>
+                    {% elif forloop.last %}
+                        <td bgcolor="grey">{{ col }}</td>
+                    {% elif not col %}
+                        <td>-</td>
+                    {% elif col <= 0 %}
+                        <td bgcolor="green">{{ col }}</td>
+                    {% elif col <= 1 %}
+                        <td>{{ col }}</td>
+                    {% elif col <= 2 %}
+                        <td bgcolor="pink">{{ col }}</td>
+                    {% elif col <= 5 %}
+                        <td bgcolor="red">{{ col }}</td>
+                    {% elif col > 5 %}
+                        <td bgcolor="firebrick">{{ col }}</td>
+                    {% endif %}
+                {% endfor %}
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
 
         </div>
       </div>
