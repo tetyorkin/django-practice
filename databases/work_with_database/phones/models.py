@@ -11,4 +11,4 @@ class Phone(models.Model):
     slug = models.SlugField(unique=True)
 
     def __str__(self):
-        return str(self.name) + ": $" + str(self.price)
+        return self.name
