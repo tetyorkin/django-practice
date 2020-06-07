@@ -9,11 +9,20 @@
         </div>
 
         <div class="sort-block">
-            {# Здесь должен быть раздел с сортировкой #}
+            <a>Сортировать по:</a >&nbsp;
+            <a href="?sort=name">названию </a>&nbsp;
+            <a href="?sort=min_price">начиная с дешевых</a>&nbsp;
+            <a href="?sort=max_price">начиная с дорогих</a>&nbsp;
         </div>
 
         <div class="content">
-            {# Здесь должен отображаться каталог с телефонами #}
+            {% for phone in phones_list %}
+                <div class="phone">
+                <h2><a href="/catalog/{{ phone.slug }}">{{ phone.name }}</a></h2>
+                <p class="price">Стоимость:{{ phone.price }}р.</p>
+                <a href="/catalog/{{ phone.slug }}"><img class="img-class" src="{{ phone.image }}"> </a>
+            {% endfor %}
+
         </div>
     </div>
 {% endblock %}
